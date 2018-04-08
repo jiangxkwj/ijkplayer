@@ -170,6 +170,7 @@ static IJKAVMoviePlayerController* instance;
 {
     self = [super init];
     if (self != nil) {
+//        NSLog(@"sdk更新标志11111111\n");
         self.scalingMode = IJKMPMovieScalingModeAspectFit;
         self.shouldAutoplay = NO;
 
@@ -604,7 +605,9 @@ static IJKAVMoviePlayerController* instance;
         
         // TODO: notify state change
     }
-    
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 10) {
+        _player.automaticallyWaitsToMinimizeStalling = NO;
+    }
     // TODO: set time to 0;
 }
 
@@ -760,7 +763,9 @@ static IJKAVMoviePlayerController* instance;
                 /* Once the AVPlayerItem becomes ready to play, i.e.
                  [playerItem status] == AVPlayerItemStatusReadyToPlay,
                  its duration can be fetched from the item. */
+                NSLog(@"AVPlayerItemStatusReadyToPlay\n");
                 dispatch_once(&_readyToPlayToken, ^{
+                    NSLog(@"AVPlayerItemStatusWillPlay\n");
                     [_avView setPlayer:_player];
                     
                     self.isPreparedToPlay = YES;
@@ -902,10 +907,10 @@ static IJKAVMoviePlayerController* instance;
 
 - (void)registerApplicationObservers
 {
-    [_notificationManager addObserver:self
-                             selector:@selector(audioSessionInterrupt:)
-                                 name:AVAudioSessionInterruptionNotification
-                               object:nil];
+//    [_notificationManager addObserver:self
+//                             selector:@selector(audioSessionInterrupt:)
+//                                 name:AVAudioSessionInterruptionNotification
+//                               object:nil];
 
     [_notificationManager addObserver:self
                              selector:@selector(applicationWillEnterForeground)
@@ -1048,7 +1053,7 @@ static IJKAVMoviePlayerController* instance;
 - (void)applicationDidBecomeActive
 {
     NSLog(@"IJKAVMoviePlayerController:applicationDidBecomeActive: %d\n", (int)[UIApplication sharedApplication].applicationState);
-    [_avView setPlayer:_player];
+//    [_avView setPlayer:_player];
 }
 
 - (void)applicationWillResignActive
@@ -1059,20 +1064,20 @@ static IJKAVMoviePlayerController* instance;
 - (void)applicationDidEnterBackground
 {
     NSLog(@"IJKAVMoviePlayerController:applicationDidEnterBackground: %d\n", (int)[UIApplication sharedApplication].applicationState);
-    if (_pauseInBackground && ![self airPlayMediaActive]) {
-        [self pause];
-    } else {
-        if (![self airPlayMediaActive]) {
-            [_avView setPlayer:nil];
-            if (isIOS9OrLater()) {
-                if ([self isPlaying]) {
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self play];
-                    });
-                }
-            }
-        }
-    }
+//    if (_pauseInBackground && ![self airPlayMediaActive]) {
+//        [self pause];
+//    } else {
+//        if (![self airPlayMediaActive]) {
+//            [_avView setPlayer:nil];
+//            if (isIOS9OrLater()) {
+//                if ([self isPlaying]) {
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                        [self play];
+//                    });
+//                }
+//            }
+//        }
+//    }
 }
 
 - (void)applicationWillTerminate

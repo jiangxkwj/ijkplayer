@@ -1549,10 +1549,10 @@ static int ijkff_inject_callback(void *opaque, int message, void *data, size_t d
 
 - (void)registerApplicationObservers
 {
-    [_notificationManager addObserver:self
-                             selector:@selector(audioSessionInterrupt:)
-                                 name:AVAudioSessionInterruptionNotification
-                               object:nil];
+//    [_notificationManager addObserver:self
+//                             selector:@selector(audioSessionInterrupt:)
+//                                 name:AVAudioSessionInterruptionNotification
+//                               object:nil];
 
     [_notificationManager addObserver:self
                              selector:@selector(applicationWillEnterForeground)
@@ -1587,32 +1587,33 @@ static int ijkff_inject_callback(void *opaque, int message, void *data, size_t d
 
 - (void)audioSessionInterrupt:(NSNotification *)notification
 {
-    int reason = [[[notification userInfo] valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
-    switch (reason) {
-        case AVAudioSessionInterruptionTypeBegan: {
-            NSLog(@"IJKFFMoviePlayerController:audioSessionInterrupt: begin\n");
-            switch (self.playbackState) {
-                case IJKMPMoviePlaybackStatePaused:
-                case IJKMPMoviePlaybackStateStopped:
-                    _playingBeforeInterruption = NO;
-                    break;
-                default:
-                    _playingBeforeInterruption = YES;
-                    break;
-            }
-            [self pause];
-            [[IJKAudioKit sharedInstance] setActive:NO];
-            break;
-        }
-        case AVAudioSessionInterruptionTypeEnded: {
-            NSLog(@"IJKFFMoviePlayerController:audioSessionInterrupt: end\n");
-            [[IJKAudioKit sharedInstance] setActive:YES];
-            if (_playingBeforeInterruption) {
-                [self play];
-            }
-            break;
-        }
-    }
+    NSLog(@"别再出现了");
+//    int reason = [[[notification userInfo] valueForKey:AVAudioSessionInterruptionTypeKey] intValue];
+//    switch (reason) {
+//        case AVAudioSessionInterruptionTypeBegan: {
+//            NSLog(@"IJKFFMoviePlayerController:audioSessionInterrupt: begin\n");
+//            switch (self.playbackState) {
+//                case IJKMPMoviePlaybackStatePaused:
+//                case IJKMPMoviePlaybackStateStopped:
+//                    _playingBeforeInterruption = NO;
+//                    break;
+//                default:
+//                    _playingBeforeInterruption = YES;
+//                    break;
+//            }
+//            [self pause];
+//            [[IJKAudioKit sharedInstance] setActive:NO];
+//            break;
+//        }
+//        case AVAudioSessionInterruptionTypeEnded: {
+//            NSLog(@"IJKFFMoviePlayerController:audioSessionInterrupt: end\n");
+//            [[IJKAudioKit sharedInstance] setActive:YES];
+//            if (_playingBeforeInterruption) {
+//                [self play];
+//            }
+//            break;
+//        }
+//    }
 }
 
 - (void)applicationWillEnterForeground
