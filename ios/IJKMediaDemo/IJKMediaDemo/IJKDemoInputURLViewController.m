@@ -37,6 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.textView.text = @"rtmp://live-hls.ihzlh.linker.cc/ihzlh/27ef7951e3666765ecae2cb46c9f2937";
 }
 
 - (void)onClickPlayButton {

@@ -127,13 +127,13 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE) {
-        NSLog(@"failed to make complete framebuffer object %x\n", status);
+        //NSLog(@"failed to make complete framebuffer object %x\n", status);
         return NO;
     }
 
     GLenum glError = glGetError();
     if (GL_NO_ERROR != glError) {
-        NSLog(@"failed to setup GL %x\n", glError);
+        //NSLog(@"failed to setup GL %x\n", glError);
         return NO;
     }
 
@@ -165,7 +165,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
     _context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     if (_context == nil) {
-        NSLog(@"failed to setup EAGLContext\n");
+        //NSLog(@"failed to setup EAGLContext\n");
         return NO;
     }
 
@@ -174,7 +174,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
     _didSetupGL = NO;
     if ([self setupEAGLContext:_context]) {
-        NSLog(@"OK setup GL\n");
+        //NSLog(@"OK setup GL\n");
         _didSetupGL = YES;
     }
 
@@ -311,7 +311,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
 - (void)invalidateRenderBuffer
 {
-    NSLog(@"invalidateRenderBuffer\n");
+    //NSLog(@"invalidateRenderBuffer\n");
     [self lockGLActive];
 
     _isRenderBufferInvalidated = YES;
@@ -342,7 +342,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
     if (![self tryLockGLActive]) {
         if (0 == (_tryLockErrorCount % 100)) {
-            NSLog(@"IJKSDLGLView:display: unable to tryLock GL active: %d\n", _tryLockErrorCount);
+            //NSLog(@"IJKSDLGLView:display: unable to tryLock GL active: %d\n", _tryLockErrorCount);
         }
         _tryLockErrorCount++;
         return;
@@ -364,9 +364,9 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 {
     if (![self setupRenderer:overlay]) {
         if (!overlay && !_renderer) {
-            NSLog(@"IJKSDLGLView: setupDisplay not ready\n");
+            //NSLog(@"IJKSDLGLView: setupDisplay not ready\n");
         } else {
-            NSLog(@"IJKSDLGLView: setupDisplay failed\n");
+            //NSLog(@"IJKSDLGLView: setupDisplay failed\n");
         }
         return;
     }
@@ -374,7 +374,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
     [[self eaglLayer] setContentsScale:_scaleFactor];
 
     if (_isRenderBufferInvalidated) {
-        NSLog(@"IJKSDLGLView: renderbufferStorage fromDrawable\n");
+        //NSLog(@"IJKSDLGLView: renderbufferStorage fromDrawable\n");
         _isRenderBufferInvalidated = NO;
 
         glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);
@@ -499,7 +499,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
 - (void)applicationWillEnterForeground
 {
-    NSLog(@"IJKSDLGLView:applicationWillEnterForeground: %d", (int)[UIApplication sharedApplication].applicationState);
+    //NSLog(@"IJKSDLGLView:applicationWillEnterForeground: %d", (int)[UIApplication sharedApplication].applicationState);
     [self setupGLOnce];
     _applicationState = IJKSDLGLViewApplicationForegroundState;
     [self toggleGLPaused:NO];
@@ -507,21 +507,21 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
 - (void)applicationDidBecomeActive
 {
-    NSLog(@"IJKSDLGLView:applicationDidBecomeActive: %d", (int)[UIApplication sharedApplication].applicationState);
+    //NSLog(@"IJKSDLGLView:applicationDidBecomeActive: %d", (int)[UIApplication sharedApplication].applicationState);
     [self setupGLOnce];
     [self toggleGLPaused:NO];
 }
 
 - (void)applicationWillResignActive
 {
-    NSLog(@"IJKSDLGLView:applicationWillResignActive: %d", (int)[UIApplication sharedApplication].applicationState);
+    //NSLog(@"IJKSDLGLView:applicationWillResignActive: %d", (int)[UIApplication sharedApplication].applicationState);
     [self toggleGLPaused:YES];
     glFinish();
 }
 
 - (void)applicationDidEnterBackground
 {
-    NSLog(@"IJKSDLGLView:applicationDidEnterBackground: %d", (int)[UIApplication sharedApplication].applicationState);
+    //NSLog(@"IJKSDLGLView:applicationDidEnterBackground: %d", (int)[UIApplication sharedApplication].applicationState);
     _applicationState = IJKSDLGLViewApplicationBackgroundState;
     [self toggleGLPaused:YES];
     glFinish();
@@ -529,7 +529,7 @@ typedef NS_ENUM(NSInteger, IJKSDLGLViewApplicationState) {
 
 - (void)applicationWillTerminate
 {
-    NSLog(@"IJKSDLGLView:applicationWillTerminate: %d", (int)[UIApplication sharedApplication].applicationState);
+    //NSLog(@"IJKSDLGLView:applicationWillTerminate: %d", (int)[UIApplication sharedApplication].applicationState);
     [self toggleGLPaused:YES];
 }
 

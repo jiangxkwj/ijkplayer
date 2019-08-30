@@ -52,12 +52,12 @@
         _spec = *aSpec;
 
         if (aSpec->format != AUDIO_S16SYS) {
-            NSLog(@"aout_open_audio: unsupported format %d\n", (int)aSpec->format);
+            //NSLog(@"aout_open_audio: unsupported format %d\n", (int)aSpec->format);
             return nil;
         }
 
         if (aSpec->channels > 2) {
-            NSLog(@"aout_open_audio: unsupported channels %d\n", (int)aSpec->channels);
+            //NSLog(@"aout_open_audio: unsupported channels %d\n", (int)aSpec->channels);
             return nil;
         }
 
@@ -68,7 +68,7 @@
         SDL_CalculateAudioSpec(&_spec);
 
         if (_spec.size == 0) {
-            NSLog(@"aout_open_audio: unexcepted audio spec size %u", _spec.size);
+            //NSLog(@"aout_open_audio: unexcepted audio spec size %u", _spec.size);
             return nil;
         }
 
@@ -82,7 +82,7 @@
                                               0,
                                               &audioQueueRef);
         if (status != noErr) {
-            NSLog(@"AudioQueue: AudioQueueNewOutput failed (%d)\n", (int)status);
+            //NSLog(@"AudioQueue: AudioQueueNewOutput failed (%d)\n", (int)status);
             self = nil;
             return nil;
         }
@@ -96,7 +96,7 @@
 
         status = AudioQueueStart(audioQueueRef, NULL);
         if (status != noErr) {
-            NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
+            //NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
             self = nil;
             return nil;
         }
@@ -113,7 +113,7 @@
         /*-
         status = AudioQueueStart(audioQueueRef, NULL);
         if (status != noErr) {
-            NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
+            //NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
             self = nil;
             return nil;
         }
@@ -142,12 +142,12 @@
         _isPaused = NO;
         NSError *error = nil;
         if (NO == [[AVAudioSession sharedInstance] setActive:YES error:&error]) {
-            NSLog(@"AudioQueue: AVAudioSession.setActive(YES) failed: %@\n", error ? [error localizedDescription] : @"nil");
+            //NSLog(@"AudioQueue: AVAudioSession.setActive(YES) failed: %@\n", error ? [error localizedDescription] : @"nil");
         }
 
         OSStatus status = AudioQueueStart(_audioQueueRef, NULL);
-        if (status != noErr)
-            NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
+//        if (status != noErr)
+            //NSLog(@"AudioQueue: AudioQueueStart failed (%d)\n", (int)status);
     }
 }
 
@@ -162,8 +162,8 @@
 
         _isPaused = YES;
         OSStatus status = AudioQueuePause(_audioQueueRef);
-        if (status != noErr)
-            NSLog(@"AudioQueue: AudioQueuePause failed (%d)\n", (int)status);
+//        if (status != noErr)
+            //NSLog(@"AudioQueue: AudioQueuePause failed (%d)\n", (int)status);
     }
 }
 

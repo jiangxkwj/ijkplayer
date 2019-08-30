@@ -574,7 +574,7 @@ static VTDecompressionSessionRef vtbsession_create(Ijk_VideoToolBox_Opaque* cont
 
     if (status != noErr) {
         NSError* error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
-        NSLog(@"Error %@", [error description]);
+        //NSLog(@"Error %@", [error description]);
         ALOGI("%s - failed with status = (%d)", __FUNCTION__, (int)status);
     }
     CFRelease(destinationPixelBufferAttributes);

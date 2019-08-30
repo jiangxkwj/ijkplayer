@@ -155,7 +155,7 @@
 
 -(void)setPlaybackRate:(float)playbackRate
 {
-    NSLog(@"[MPMoviePlayerController setPlaybackRate] is not supported\n");
+    //NSLog(@"[MPMoviePlayerController setPlaybackRate] is not supported\n");
 }
 
 -(float)playbackRate
@@ -165,7 +165,7 @@
 
 -(void)setPlaybackVolume:(float)playbackVolume
 {
-    NSLog(@"[MPMoviePlayerController setPlaybackVolume] is not supported\n");
+    //NSLog(@"[MPMoviePlayerController setPlaybackVolume] is not supported\n");
 }
 
 -(float)playbackVolume

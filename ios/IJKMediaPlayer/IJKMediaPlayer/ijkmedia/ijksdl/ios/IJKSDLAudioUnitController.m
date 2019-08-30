@@ -45,12 +45,12 @@
         _spec = *aSpec;
 
         if (aSpec->format != AUDIO_S16SYS) {
-            NSLog(@"aout_open_audio: unsupported format %d\n", (int)aSpec->format);
+            //NSLog(@"aout_open_audio: unsupported format %d\n", (int)aSpec->format);
             return nil;
         }
 
         if (aSpec->channels > 6) {
-            NSLog(@"aout_open_audio: unsupported channels %d\n", (int)aSpec->channels);
+            //NSLog(@"aout_open_audio: unsupported channels %d\n", (int)aSpec->channels);
             return nil;
         }
 
@@ -155,12 +155,12 @@
     _isPaused = NO;
     NSError *error = nil;
     if (NO == [[AVAudioSession sharedInstance] setActive:YES error:&error]) {
-        NSLog(@"AudioUnit: AVAudioSession.setActive(YES) failed: %@\n", error ? [error localizedDescription] : @"nil");
+        //NSLog(@"AudioUnit: AVAudioSession.setActive(YES) failed: %@\n", error ? [error localizedDescription] : @"nil");
     }
 
     OSStatus status = AudioOutputUnitStart(_auUnit);
-    if (status != noErr)
-        NSLog(@"AudioUnit: AudioOutputUnitStart failed (%d)\n", (int)status);
+//    if (status != noErr)
+        //NSLog(@"AudioUnit: AudioOutputUnitStart failed (%d)\n", (int)status);
 }
 
 - (void)pause

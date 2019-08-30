@@ -49,6 +49,38 @@
 
     [_subpaths addObject:@".."];
 
+    NSString * docPath = [NSBundle.mainBundle pathForResource:@"sqape.ape" ofType:@""];
+    files = @[docPath];
+    // 沙盒Library目录
+    NSString * appDir = [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject];
+    //appLib  Library/Caches目录
+    NSString *appLib = [appDir stringByAppendingString:@"/Caches"];
+    
+    
+    
+//    BOOL filesPresent = [self copyMissingFile:docPath toPath:appLib];
+//    if (filesPresent) {
+//        NSLog(@"OK");
+//    }
+//    else
+//    {
+//        NSLog(@"NO");
+//    }
+//
+//    // 创建文件夹
+//    NSString *createDir =  [NSHomeDirectory() stringByAppendingString:@"/test"];
+//    [self createFolder:createDir];
+//
+//    // 把文件拷贝到Test目录
+//    BOOL filesPresent1 = [self copyMissingFile:docPath toPath:createDir];
+//    if (filesPresent1) {
+//        NSLog(@"OK");
+//    }
+//    else
+//    {
+//        NSLog(@"NO");
+//    }
+    
     for (NSString *fileName in files) {
         NSString *fullFileName = [_folderPath stringByAppendingPathComponent:fileName];
         
@@ -126,7 +158,7 @@
 
             fileName = [fileName stringByStandardizingPath];
             
-            [IJKVideoViewController presentFromViewController:self withTitle:[NSString stringWithFormat:@"File: %@", fileName] URL:[NSURL fileURLWithPath:fileName] completion:^{
+            [IJKVideoViewController presentFromViewController:self withTitle:[NSString stringWithFormat:@"File: %@", fileName] URL:[NSURL fileURLWithPath:_files[indexPath.row]] completion:^{
             }];
             
         } break;
@@ -178,5 +210,32 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)copyMissingFile:(NSString *)sourcePath toPath:(NSString *)toPath
+{
+    BOOL retVal = YES; // If the file already exists, we'll return success…
+    NSString * finalLocation = [toPath stringByAppendingPathComponent:[sourcePath lastPathComponent]];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:finalLocation])
+    {
+        retVal = [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:finalLocation error:NULL];
+    }
+    return retVal;
+}
+
+/**
+ *    @brief    创建文件夹
+ *
+ *    @param     createDir     创建文件夹路径
+ */
+- (void)createFolder:(NSString *)createDir
+{
+    BOOL isDir = NO;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL existed = [fileManager fileExistsAtPath:createDir isDirectory:&isDir];
+    if ( !(isDir == YES && existed == YES) )
+    {
+        [fileManager createDirectoryAtPath:createDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
 
 @end

@@ -63,11 +63,13 @@
 
 - (void)updateIdleTimer
 {
-    if (self.appIdleTimerDisabled || self.mediaModuleIdleTimerDisabled) {
-        [UIApplication sharedApplication].idleTimerDisabled = YES;
-    } else {
-        [UIApplication sharedApplication].idleTimerDisabled = NO;
-    }
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (self.appIdleTimerDisabled || self.mediaModuleIdleTimerDisabled) {
+//            [UIApplication sharedApplication].idleTimerDisabled = YES;
+//        } else {
+//            [UIApplication sharedApplication].idleTimerDisabled = NO;
+//        }
+//    });
 }
 
 @end

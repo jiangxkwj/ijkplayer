@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2AB561D8202011ED0070A288 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB561D6202011EC0070A288 /* libcrypto.a */; };
-		2AB561D9202011ED0070A288 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB561D7202011EC0070A288 /* libssl.a */; };
+		2A554E6122B8F58E00A0F1D6 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A554E5F22B8F58E00A0F1D6 /* libssl.a */; };
+		2A554E6222B8F58E00A0F1D6 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A554E6022B8F58E00A0F1D6 /* libcrypto.a */; };
 		4D32BC811F906E3A00CE9F03 /* IJKSDLGLViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D32BC801F906E3600CE9F03 /* IJKSDLGLViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D32BC821F906E3B00CE9F03 /* IJKSDLGLViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D32BC801F906E3600CE9F03 /* IJKSDLGLViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DA7F6891F2B1E270032A499 /* ijkiourlhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 4DA7F6881F2B1E270032A499 /* ijkiourlhook.c */; };
@@ -271,8 +271,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2AB561D6202011EC0070A288 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../build/universal/lib/libcrypto.a; sourceTree = "<group>"; };
-		2AB561D7202011EC0070A288 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../build/universal/lib/libssl.a; sourceTree = "<group>"; };
+		2A554E5F22B8F58E00A0F1D6 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		2A554E6022B8F58E00A0F1D6 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		454316201A66493700676070 /* ffpipeline_ios.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ffpipeline_ios.c; path = ijkmedia/ijkplayer/ios/pipeline/ffpipeline_ios.c; sourceTree = "<group>"; };
 		454316211A66493700676070 /* ffpipeline_ios.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ffpipeline_ios.h; path = ijkmedia/ijkplayer/ios/pipeline/ffpipeline_ios.h; sourceTree = "<group>"; };
 		454316221A66493700676070 /* ffpipenode_ios_videotoolbox_vdec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ffpipenode_ios_videotoolbox_vdec.h; path = ijkmedia/ijkplayer/ios/pipeline/ffpipenode_ios_videotoolbox_vdec.h; sourceTree = "<group>"; };
@@ -485,14 +485,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AB561D9202011ED0070A288 /* libssl.a in Frameworks */,
 				E653C6F61BCE5A750016835A /* libavcodec.a in Frameworks */,
 				E653C6F81BCE5A750016835A /* libavfilter.a in Frameworks */,
+				2A554E6222B8F58E00A0F1D6 /* libcrypto.a in Frameworks */,
+				2A554E6122B8F58E00A0F1D6 /* libssl.a in Frameworks */,
 				E653C6FA1BCE5A750016835A /* libavformat.a in Frameworks */,
 				E653C6FC1BCE5A750016835A /* libavutil.a in Frameworks */,
 				E653C6FE1BCE5A750016835A /* libswresample.a in Frameworks */,
 				E653C7001BCE5A750016835A /* libswscale.a in Frameworks */,
-				2AB561D8202011ED0070A288 /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,8 +656,6 @@
 		E6903EBB17EAF6C500CFD954 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2AB561D6202011EC0070A288 /* libcrypto.a */,
-				2AB561D7202011EC0070A288 /* libssl.a */,
 				5450AF8F1E63E59800568494 /* libz.tbd */,
 			);
 			name = Frameworks;
@@ -703,6 +701,8 @@
 		E6903FC117EAFC2C00CFD954 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				2A554E6022B8F58E00A0F1D6 /* libcrypto.a */,
+				2A554E5F22B8F58E00A0F1D6 /* libssl.a */,
 				E653C6EF1BCE5A750016835A /* libavcodec.a */,
 				E653C6F01BCE5A750016835A /* libavfilter.a */,
 				E653C6F11BCE5A750016835A /* libavformat.a */,
@@ -1115,6 +1115,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = E6903EB017EAF6C500CFD954;
